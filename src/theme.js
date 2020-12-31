@@ -1,12 +1,19 @@
-const theme = {
+export const theme = {
   colors: {
-    textPrimary: '#24292e',
-    textSecondary: '#586069',
-    primary: '#874d91',
+    textPrimary: '#24292e', // black
+    textSecondary: '#586069', // gray
+    primary: '#874d91', // lila
+    inverse: 'white',
+  },
+  backgroundColors: {
+    notselected: 'lightgray',
+    selected: 'gray',
+    night: 'black',
   },
   fontSizes: {
     body: 14,
     subheading: 16,
+    appbar: 25,
   },
   fonts: {
     main: 'System',
@@ -15,6 +22,17 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+};
+
+export const shadowing = {
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 3,
+  },
+  shadowOpacity: 0.27,
+  shadowRadius: 4.65,
+  elevation: 6,
 };
 
 export default theme;

@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Text from './Text';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   itemstyles: {
-    backgroundColor: 'lightgray',
+    backgroundColor: theme.backgroundColors.notselected,
   },
   activeItem: {
-    backgroundColor: 'gray',
+    backgroundColor: theme.backgroundColors.selected,
   },
 });
 
