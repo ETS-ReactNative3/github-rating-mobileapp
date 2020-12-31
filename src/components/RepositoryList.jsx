@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
-  }
+  },
 });
 
 const repositories = [
@@ -61,12 +61,14 @@ const RepositoryList = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   const onPress = (id) => setSelectedId(id);
-  
+
   return (
     <FlatList
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={(item) => <RepositoryItem item={item.item} onPress={onPress} active={item.item.id === selectedId}/>}
+      renderItem={(item) => (
+        <RepositoryItem item={item.item} onPress={onPress} active={item.item.id === selectedId} />
+      )}
       keyExtractor={(item) => item.id}
       extraData={selectedId}
     />
