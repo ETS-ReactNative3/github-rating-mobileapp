@@ -1,9 +1,12 @@
+const primaryColor = '#874d91'; // lila
+
 export const theme = {
   colors: {
     textPrimary: '#24292e', // black
     textSecondary: '#586069', // gray
-    primary: '#874d91', // lila
+    primary: primaryColor,
     inverse: 'white',
+    error: '#B00020', // red
   },
   backgroundColors: {
     notselected: 'white',
@@ -22,6 +25,15 @@ export const theme = {
   fontWeights: {
     normal: '400',
     bold: '700',
+  },
+  buttonStyle: {
+    backgroundColor: primaryColor,
+    padding: 10,
+    textAlign: 'center',
+    borderRadius: 7,
+    borderWidth: 3,
+    borderColor: primaryColor,
+    overflow: 'hidden', // otherwise the borderRadius doesnt apply for the bg color
   },
 };
 

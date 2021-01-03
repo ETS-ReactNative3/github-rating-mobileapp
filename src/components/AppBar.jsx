@@ -23,7 +23,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollviewStyles}>
         <NavItem label="Repositories" href="" />
-        <NavItem label="Sign In" href={ROUTE_SIGNIN} />
+        <NavItem label="Sign in" href={ROUTE_SIGNIN} />
       </ScrollView>
     </View>
   );

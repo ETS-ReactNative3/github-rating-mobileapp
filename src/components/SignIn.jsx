@@ -1,9 +1,13 @@
 import React from 'react';
-
-import Text from './Text';
+import { View } from 'react-native';
+import LogInForm from './LogInForm';
 
 const SignIn = () => {
-  return <Text>The sign in view</Text>;
+  return (
+    <View>
+      <LogInForm />
+    </View>
+  );
 };
 
 export default SignIn;
