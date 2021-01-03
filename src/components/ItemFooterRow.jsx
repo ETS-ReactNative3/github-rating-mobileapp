@@ -22,7 +22,7 @@ const ItemFooterRow = ({ label, amount }) => {
       <Text fontWeight="bold" style={styles.mgBottom}>
         {cleanAmount(amount)}
       </Text>
-      <Text>{label}</Text>
+      <Text color="textSecondary">{label}</Text>
     </View>
   );
 };
