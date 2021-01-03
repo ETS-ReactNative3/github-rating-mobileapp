@@ -6,8 +6,8 @@ export const theme = {
     inverse: 'white',
   },
   backgroundColors: {
-    notselected: 'lightgray',
-    selected: 'gray',
+    notselected: 'white',
+    selected: 'lightgray',
     night: 'black',
   },
   fontSizes: {
