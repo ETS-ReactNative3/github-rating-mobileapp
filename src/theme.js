@@ -9,6 +9,7 @@ export const theme = {
     notselected: 'white',
     selected: 'lightgray',
     night: 'black',
+    main: '#e1e5e8',
   },
   fontSizes: {
     body: 14,
