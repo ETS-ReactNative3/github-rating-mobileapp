@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const LogInForm = () => {
+const SignInForm = () => {
   var history = useHistory();
   const [signIn] = useSignin();
 
@@ -62,4 +62,4 @@ const LogInForm = () => {
   );
 };
 
-export default LogInForm;
+export default SignInForm;

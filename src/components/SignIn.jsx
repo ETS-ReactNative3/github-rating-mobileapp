@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import LogInForm from './LogInForm';
+import SignInForm from './SignInForm';
 
 const SignIn = () => {
   return (
     <View>
-      <LogInForm />
+      <SignInForm />
     </View>
   );
 };
