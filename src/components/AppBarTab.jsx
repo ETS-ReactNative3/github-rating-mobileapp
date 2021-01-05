@@ -26,16 +26,15 @@ const TabLink = ({ href, label, component, ...props }) => {
 };
 
 const AppBarTab = ({ label, href, onPress }) => {
-  return onPress ? (
+  console.log(href);
+  return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.navitem}>
-        <TabText label={label} />
-      </View>
-    </TouchableWithoutFeedback>
-  ) : (
-    <TouchableWithoutFeedback>
-      <View style={styles.navitem}>
-        <TabLink label={label} href={href} component={TouchableWithoutFeedback} />
+        {href === undefined ? (
+          <TabText label={label} />
+        ) : (
+          <TabLink label={label} href={href} component={TouchableWithoutFeedback} />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
