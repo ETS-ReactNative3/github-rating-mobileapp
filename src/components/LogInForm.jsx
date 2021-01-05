@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 const LogInForm = () => {
+  var history = useHistory();
   const [signIn] = useSignin();
 
   const initialValues = {
@@ -26,7 +28,9 @@ const LogInForm = () => {
     const { username, password } = values;
     try {
       const { data } = await signIn({ username, password });
-      console.log(data);
+      if (data && data.authorize && data.authorize.accessToken) {
+        history.push('/');
+      }
     } catch (e) {
       console.log('Sign in failed');
     }
