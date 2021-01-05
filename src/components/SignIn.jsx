@@ -32,7 +32,7 @@ const SignIn = () => {
         history.push('/');
       }
     } catch (e) {
-      console.log('Sign in failed');
+      console.log('Sign in failed', e);
     }
   };
 

@@ -15,8 +15,7 @@ const createApolloClient = (authStorage) => {
           },
         });
       } catch (e) {
-        console.log('Retrieving authentication failed.');
-        console.log(e);
+        console.log('Retrieving authentication failed.', e);
       }
     },
   });
