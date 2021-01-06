@@ -16,8 +16,7 @@ const useCreateReview = () => {
       },
     };
 
-    const res = await mutate(argsobj);
-    return res;
+    return await mutate(argsobj);
   };
 
   return [createReview, result];

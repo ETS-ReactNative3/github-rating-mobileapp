@@ -65,7 +65,6 @@ const CreateReview = () => {
   const handleSubmit = async (values) => {
     const { ownerName, repositoryName, rating, text } = values;
 
-    console.log(ownerName, repositoryName, rating, text);
     try {
       const { data, errors } = await createReview({ ownerName, repositoryName, rating, text });
       if (data && data.createReview) {
