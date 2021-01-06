@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-import { ROUTE_SIGNIN } from '../Constants';
+import { ROUTE_SIGNIN, ROUTE_CREATE_REVIEW } from '../Constants';
 import useSignedInUser from '../hooks/useSignedInUser';
 import AppBarTab from './AppBarTab';
 import useSignOut from '../hooks/useSignOut';
@@ -29,7 +29,10 @@ const AppBar = () => {
       <ScrollView horizontal contentContainerStyle={styles.scrollviewStyles}>
         <AppBarTab label="Repositories" href="" />
         {signedInUser && signedInUser.authorizedUser !== null ? (
-          <AppBarTab label="Sign out" onPress={async () => await signOut()} />
+          <>
+            <AppBarTab label="Create a review" href={ROUTE_CREATE_REVIEW} />
+            <AppBarTab label="Sign out" onPress={async () => await signOut()} />
+          </>
         ) : (
           <AppBarTab label="Sign in" href={ROUTE_SIGNIN} />
         )}

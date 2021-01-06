@@ -19,7 +19,7 @@ export const theme = {
   fontSizes: {
     body: 14,
     subheading: 16,
-    appbar: 25,
+    appbar: 20,
   },
   fonts: {
     main: Platform.select({
