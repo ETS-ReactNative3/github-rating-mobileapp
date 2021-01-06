@@ -26,7 +26,6 @@ const TabLink = ({ href, label, component, ...props }) => {
 };
 
 const AppBarTab = ({ label, href, onPress }) => {
-  console.log(href);
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.navitem}>
