@@ -7,11 +7,7 @@ const useRepositories = () => {
   });
 
   return {
-    repositories: data
-      ? data.repositories
-        ? data.repositories.edges.map((edge) => edge.node)
-        : []
-      : null,
+    repositories: data ? data.repositories : null,
     loading,
     refetch,
   };

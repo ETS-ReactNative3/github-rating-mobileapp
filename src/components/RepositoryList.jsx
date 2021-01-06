@@ -12,14 +12,15 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = () => {
+export const RepositoryListContainer = ({ repositories }) => {
   const [selectedId, setSelectedId] = useState(null);
   const onPress = (id) => setSelectedId(id);
 
-  const { repositories } = useRepositories();
+  const repositoryNodes = repositories ? repositories.edges.map((edge) => edge.node) : [];
+
   return (
     <FlatList
-      data={repositories}
+      data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={(item) => (
         <RepositoryItem item={item.item} onPress={onPress} active={item.item.id === selectedId} />
@@ -28,6 +29,12 @@ const RepositoryList = () => {
       extraData={selectedId}
     />
   );
+};
+
+const RepositoryList = () => {
+  const { repositories } = useRepositories();
+
+  return repositories && <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;
