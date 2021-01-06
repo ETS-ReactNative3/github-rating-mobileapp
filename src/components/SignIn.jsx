@@ -15,25 +15,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignIn = () => {
-  var history = useHistory();
-  const [signIn] = useSignin();
-
+export const SignInContainer = ({ handleSubmit }) => {
   const initialValues = {
     username: '',
     password: '',
-  };
-
-  const handleSubmit = async (values) => {
-    const { username, password } = values;
-    try {
-      const { data } = await signIn({ username, password });
-      if (data && data.authorize && data.authorize.accessToken) {
-        history.push('/');
-      }
-    } catch (e) {
-      console.log('Sign in failed', e);
-    }
   };
 
   const validationSchema = yup.object().shape({
@@ -62,6 +47,25 @@ const SignIn = () => {
       </Formik>
     </View>
   );
+};
+
+const SignIn = () => {
+  var history = useHistory();
+  const [signIn] = useSignin();
+
+  const handleSubmit = async (values) => {
+    const { username, password } = values;
+    try {
+      const { data } = await signIn({ username, password });
+      if (data && data.authorize && data.authorize.accessToken) {
+        history.push('/');
+      }
+    } catch (e) {
+      console.log('Sign in failed', e);
+    }
+  };
+
+  return <SignInContainer handleSubmit={handleSubmit} />;
 };
 
 export default SignIn;
