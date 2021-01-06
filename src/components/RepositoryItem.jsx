@@ -61,14 +61,19 @@ const Item = ({ item, onPress, style }) => (
           source={{
             uri: item.ownerAvatarUrl,
           }}
+          testID="picture"
         />
       </View>
       <View style={styles.titleRight}>
-        <Text color="primary" fontWeight="bold" style={styles.mgBottom}>
+        <Text color="primary" fontWeight="bold" style={styles.mgBottom} testID="fullName">
           {item.fullName}
         </Text>
-        <Text style={styles.mgBottom}>{item.description}</Text>
-        <Text style={styles.language}>{item.language}</Text>
+        <Text style={styles.mgBottom} testID="description">
+          {item.description}
+        </Text>
+        <Text style={styles.language} testID="language">
+          {item.language}
+        </Text>
       </View>
     </View>
     <View style={styles.subtitle}>

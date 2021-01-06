@@ -19,7 +19,7 @@ const cleanAmount = (amount) => {
 const ItemFooterRow = ({ label, amount }) => {
   return (
     <View style={styles.footerItem}>
-      <Text fontWeight="bold" style={styles.mgBottom}>
+      <Text fontWeight="bold" style={styles.mgBottom} testID={label}>
         {cleanAmount(amount)}
       </Text>
       <Text color="textSecondary">{label}</Text>
