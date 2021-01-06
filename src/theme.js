@@ -32,15 +32,6 @@ export const theme = {
     normal: '400',
     bold: '700',
   },
-  buttonStyle: {
-    backgroundColor: primaryColor,
-    padding: 10,
-    textAlign: 'center',
-    borderRadius: 7,
-    borderWidth: 3,
-    borderColor: primaryColor,
-    overflow: 'hidden', // otherwise the borderRadius doesnt apply for the bg color
-  },
 };
 
 export const shadowing = {
