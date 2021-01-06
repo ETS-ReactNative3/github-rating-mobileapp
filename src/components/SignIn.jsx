@@ -57,10 +57,11 @@ const SignIn = () => {
   const handleSubmit = async (values) => {
     const { username, password } = values;
     try {
-      const { data } = await signIn({ username, password });
+      const { data, errors } = await signIn({ username, password });
       if (data && data.authorize && data.authorize.accessToken) {
         history.push('/');
       }
+      if (errors) throw errors;
     } catch (e) {
       console.log('Sign in failed', e);
     }
