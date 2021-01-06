@@ -35,10 +35,15 @@ export const SignInContainer = ({ handleSubmit }) => {
       >
         {({ handleSubmit }) => (
           <View style={styles.formView}>
-            <FormikTextInput name="username" placeholder="Username" />
-            <FormikTextInput name="password" placeholder="Password" secureTextEntry />
+            <FormikTextInput name="username" placeholder="Username" testID="username" />
+            <FormikTextInput
+              name="password"
+              placeholder="Password"
+              secureTextEntry
+              testID="password"
+            />
             <TouchableWithoutFeedback onPress={handleSubmit}>
-              <Text fontWeight="bold" color="inverse" style={theme.buttonStyle}>
+              <Text fontWeight="bold" color="inverse" style={theme.buttonStyle} testID="signinBtn">
                 Sign in
               </Text>
             </TouchableWithoutFeedback>
