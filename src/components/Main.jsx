@@ -4,10 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
-import { ROUTE_SIGNIN, ROUTE_CREATE_REVIEW } from '../Constants';
+import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW } from '../Constants';
 import theme from '../theme';
 import { SingleRepositoryItem } from './RepositoryItem';
 import CreateReview from './CreateReview';
+import SignUp from './SignUp';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +34,9 @@ const Main = () => {
         </Route>
         <Route path={`/${ROUTE_SIGNIN}`}>
           <SignIn />
+        </Route>
+        <Route path={`/${ROUTE_SIGNUP}`}>
+          <SignUp />
         </Route>
         <Redirect to="/" />
       </Switch>

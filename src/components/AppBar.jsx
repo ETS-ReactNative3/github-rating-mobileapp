@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-import { ROUTE_SIGNIN, ROUTE_CREATE_REVIEW } from '../Constants';
+import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW } from '../Constants';
 import useSignedInUser from '../hooks/useSignedInUser';
 import AppBarTab from './AppBarTab';
 import useSignOut from '../hooks/useSignOut';
@@ -34,7 +34,10 @@ const AppBar = () => {
             <AppBarTab label="Sign out" onPress={async () => await signOut()} />
           </>
         ) : (
-          <AppBarTab label="Sign in" href={ROUTE_SIGNIN} />
+          <>
+            <AppBarTab label="Sign in" href={ROUTE_SIGNIN} />
+            <AppBarTab label="Sign up" href={ROUTE_SIGNUP} />
+          </>
         )}
       </ScrollView>
     </View>
