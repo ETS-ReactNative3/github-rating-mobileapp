@@ -9,10 +9,10 @@ export const theme = {
     primary: primaryColor,
     inverse: 'white',
     error: '#B00020', // red
+    border: 'lightgray',
   },
   backgroundColors: {
-    notselected: 'white',
-    selected: 'lightgray',
+    white: 'white',
     night: 'black',
     main: '#e1e5e8',
   },

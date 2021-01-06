@@ -4,7 +4,7 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   textinputdefaults: {
-    borderColor: theme.backgroundColors.selected,
+    borderColor: theme.colors.border,
     borderRadius: 3,
     borderWidth: 1,
     padding: 10,

@@ -11,7 +11,7 @@ import BtnPrimary from './BtnPrimary';
 const styles = StyleSheet.create({
   formView: {
     padding: 10,
-    backgroundColor: theme.backgroundColors.notselected,
+    backgroundColor: theme.backgroundColors.white,
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, View, FlatList } from 'react-native';
 import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
@@ -7,14 +7,9 @@ import ItemFooterRow from './ItemFooterRow';
 import useRepository from '../hooks/useRepository';
 import { useParams } from 'react-router-native';
 import BtnPrimary from './BtnPrimary';
+import ReviewItem from './ReviewItem';
 
 const styles = StyleSheet.create({
-  itemstyles: {
-    backgroundColor: theme.backgroundColors.notselected,
-  },
-  activeItem: {
-    //backgroundColor: theme.backgroundColors.selected,
-  },
   picture: {
     width: 50,
     height: 50,
@@ -31,6 +26,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     padding: 10,
+    backgroundColor: theme.backgroundColors.white,
+    marginBottom: 10,
   },
   title: {
     display: 'flex',
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexGrow: 1,
     paddingLeft: 10,
-    flexShrink: 1,
+    flexShrink: 1, // text to not overflow component
   },
   subtitle: {
     display: 'flex',
@@ -56,9 +53,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ item, style }) => {
+const RepositoryInfo = ({ item }) => {
   return (
-    <View style={[styles.item, style, styles.container]}>
+    <View>
       <View style={styles.title}>
         <View style={styles.titleLeft}>
           <Image
@@ -87,22 +84,16 @@ const Item = ({ item, style }) => {
         <ItemFooterRow label="Reviews" amount={item.reviewCount} />
         <ItemFooterRow label="Ratings" amount={item.ratingAverage} />
       </View>
-      {item.url && (
-        <BtnPrimary
-          style={{ marginTop: 10 }}
-          label="Open in GitHub"
-          onPress={() => Linking.openURL(item.url)}
-          testID="openInGithubBtn"
-        />
-      )}
     </View>
   );
 };
 
-const RepositoryItem = ({ item, onPress }) => {
+const RepositoryListItem = ({ item, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress(item.id)}>
-      <Item item={item} style={styles.itemstyles} />
+      <View style={styles.container}>
+        <RepositoryInfo item={item} style={styles.itemstyles} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -111,7 +102,34 @@ export const SingleRepositoryItem = () => {
   let { id } = useParams();
   const { repository } = useRepository(id);
 
-  return repository && <Item item={repository} style={[styles.itemstyles, styles.activeItem]} />;
+  const reviewNodes =
+    repository && repository.reviews && repository.reviews.edges
+      ? repository.reviews.edges.map((edge) => edge.node)
+      : [];
+
+  return (
+    repository && (
+      <>
+        <FlatList
+          data={reviewNodes}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+          renderItem={({ item }) => <ReviewItem review={item} />}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={() => (
+            <View style={[styles.container]}>
+              <RepositoryInfo item={repository} />
+              <BtnPrimary
+                style={{ marginTop: 10 }}
+                label="Open in GitHub"
+                onPress={() => Linking.openURL(repository.url)}
+                testID="openInGithubBtn"
+              />
+            </View>
+          )}
+        />
+      </>
+    )
+  );
 };
 
-export default RepositoryItem;
+export default RepositoryListItem;

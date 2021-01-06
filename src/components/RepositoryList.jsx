@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import RepositoryItem from './RepositoryItem';
+import { FlatList } from 'react-native';
+import RepositoryListItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useHistory } from 'react-router-native';
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-    // backgroundColor: '#e1e5e8',
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
-
 export const RepositoryListContainer = ({ repositories }) => {
   const history = useHistory();
-  const [selectedId, setSelectedId] = useState(null);
   const onPress = (id) => {
-    setSelectedId(id);
     history.push(`/repo/${id}`);
   };
 
@@ -26,12 +15,8 @@ export const RepositoryListContainer = ({ repositories }) => {
   return (
     <FlatList
       data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={(item) => (
-        <RepositoryItem item={item.item} onPress={onPress} active={item.item.id === selectedId} />
-      )}
+      renderItem={(item) => <RepositoryListItem item={item.item} onPress={onPress} />}
       keyExtractor={(item) => item.id}
-      extraData={selectedId}
     />
   );
 };
