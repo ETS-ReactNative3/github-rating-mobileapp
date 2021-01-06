@@ -1,15 +1,19 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
+import * as Linking from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 import ItemFooterRow from './ItemFooterRow';
+import useRepository from '../hooks/useRepository';
+import { useParams } from 'react-router-native';
+import BtnPrimary from './BtnPrimary';
 
 const styles = StyleSheet.create({
   itemstyles: {
     backgroundColor: theme.backgroundColors.notselected,
   },
   activeItem: {
-    backgroundColor: theme.backgroundColors.selected,
+    //backgroundColor: theme.backgroundColors.selected,
   },
   picture: {
     width: 50,
@@ -52,47 +56,62 @@ const styles = StyleSheet.create({
   },
 });
 
-const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style, styles.container]}>
-    <View style={styles.title}>
-      <View style={styles.titleLeft}>
-        <Image
-          style={styles.picture}
-          source={{
-            uri: item.ownerAvatarUrl,
-          }}
-          testID="picture"
-        />
-      </View>
-      <View style={styles.titleRight}>
-        <Text color="primary" fontWeight="bold" style={styles.mgBottom} testID="fullName">
-          {item.fullName}
-        </Text>
-        <Text style={styles.mgBottom} testID="description">
-          {item.description}
-        </Text>
-        <Text style={styles.language} testID="language">
-          {item.language}
-        </Text>
-      </View>
-    </View>
-    <View style={styles.subtitle}>
-      <ItemFooterRow label="Stars" amount={item.stargazersCount} />
-      <ItemFooterRow label="Forks" amount={item.forksCount} />
-      <ItemFooterRow label="Reviews" amount={item.reviewCount} />
-      <ItemFooterRow label="Ratings" amount={item.ratingAverage} />
-    </View>
-  </TouchableOpacity>
-);
-
-const RepositoryItem = ({ item, onPress, active }) => {
+const Item = ({ item, style }) => {
   return (
-    <Item
-      item={item}
-      onPress={() => onPress(item.id)}
-      style={[styles.itemstyles, active && styles.activeItem]}
-    />
+    <View style={[styles.item, style, styles.container]}>
+      <View style={styles.title}>
+        <View style={styles.titleLeft}>
+          <Image
+            style={styles.picture}
+            source={{
+              uri: item.ownerAvatarUrl,
+            }}
+            testID="picture"
+          />
+        </View>
+        <View style={styles.titleRight}>
+          <Text color="primary" fontWeight="bold" style={styles.mgBottom} testID="fullName">
+            {item.fullName}
+          </Text>
+          <Text style={styles.mgBottom} testID="description">
+            {item.description}
+          </Text>
+          <Text style={styles.language} testID="language">
+            {item.language}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.subtitle}>
+        <ItemFooterRow label="Stars" amount={item.stargazersCount} />
+        <ItemFooterRow label="Forks" amount={item.forksCount} />
+        <ItemFooterRow label="Reviews" amount={item.reviewCount} />
+        <ItemFooterRow label="Ratings" amount={item.ratingAverage} />
+      </View>
+      {item.url && (
+        <BtnPrimary
+          style={{ marginTop: 10 }}
+          label="Open in GitHub"
+          onPress={() => Linking.openURL(item.url)}
+          testID="openInGithubBtn"
+        />
+      )}
+    </View>
   );
+};
+
+const RepositoryItem = ({ item, onPress }) => {
+  return (
+    <TouchableOpacity onPress={() => onPress(item.id)}>
+      <Item item={item} style={styles.itemstyles} />
+    </TouchableOpacity>
+  );
+};
+
+export const SingleRepositoryItem = () => {
+  let { id } = useParams();
+  const { repository } = useRepository(id);
+
+  return repository && <Item item={repository} style={[styles.itemstyles, styles.activeItem]} />;
 };
 
 export default RepositoryItem;
