@@ -19,7 +19,7 @@ const TabText = ({ label, ...props }) => {
 
 const TabLink = ({ href, label, component, ...props }) => {
   return (
-    <Link to={`/${href}`} activeOpacity={0.8} component={component} {...props}>
+    <Link to={`/${href}`} component={component} {...props}>
       <TabText label={label} />
     </Link>
   );
