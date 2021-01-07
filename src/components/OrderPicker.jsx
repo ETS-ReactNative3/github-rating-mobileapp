@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Chevron } from 'react-native-shapes';
 import theme from '../theme';
+import TextInput from './TextInput';
 
 const pickerStyles = StyleSheet.create({
   inputIOS: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const OrderPicker = ({ selectOrder, order }) => {
+const OrderPicker = ({ selectOrder, order, handleFilterChange, filter }) => {
   const labels = {
     default: 'Latest repositories',
     highestRated: 'Highest rated repositories',
@@ -55,6 +56,11 @@ const OrderPicker = ({ selectOrder, order }) => {
   };
   return (
     <View style={styles.headerComponent}>
+      <TextInput
+        onChangeText={(text) => handleFilterChange(text)}
+        value={filter}
+        placeholder="Search"
+      />
       {Platform.select({
         ios: (
           <RNPickerSelect

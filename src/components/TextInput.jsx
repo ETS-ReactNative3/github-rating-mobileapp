@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 1,
     padding: 10,
+    backgroundColor: theme.backgroundColors.white,
   },
   textinputError: {
     borderColor: theme.colors.error,
