@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
   },
 });
 
+const cleanDate = (inputDate) => {
+  if (!inputDate) return '';
+  return new Date(inputDate).toLocaleDateString();
+};
+
 const ReviewItem = ({ review }) => {
   return (
     review && (
@@ -41,7 +46,7 @@ const ReviewItem = ({ review }) => {
           <Text fontWeight="bold">
             {review.repository ? review.repository.fullName : review.user.username}
           </Text>
-          <Text color="textSecondary">{review.createdAt}</Text>
+          <Text color="textSecondary">{cleanDate(review.createdAt)}</Text>
           <Text>{review.text}</Text>
         </View>
       </View>
