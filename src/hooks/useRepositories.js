@@ -16,18 +16,48 @@ const orderingOptions = {
   },
 };
 
-const useRepositories = ({ order, searchKeyword }) => {
-  const { data, loading, ...result } = useQuery(GET_REPOSITORIES, {
+const useRepositories = ({ order, searchKeyword, first }) => {
+  var variablesObj = {
+    ...(order ? orderingOptions[order] : orderingOptions.default),
+    searchKeyword,
+    first,
+  };
+
+  const { data, loading, fetchMore, ...result } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
-    variables: {
-      ...(order ? orderingOptions[order] : orderingOptions.default),
-      searchKeyword,
-    },
+    variables: variablesObj,
   });
+
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data && data.repositories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      query: GET_REPOSITORIES,
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variablesObj,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const nextResult = {
+          repositories: {
+            ...fetchMoreResult.repositories,
+            edges: [...previousResult.repositories.edges, ...fetchMoreResult.repositories.edges],
+          },
+        };
+
+        return nextResult;
+      },
+    });
+  };
 
   return {
     repositories: data ? data.repositories : null,
     loading,
+    fetchMore: handleFetchMore,
     ...result,
   };
 };

@@ -12,6 +12,7 @@ export const RepositoryListContainer = ({
   order,
   handleFilterChange,
   filter,
+  onEndReach,
 }) => {
   const history = useHistory();
   const onPress = (id) => {
@@ -32,6 +33,8 @@ export const RepositoryListContainer = ({
           filter={filter}
         />
       }
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -40,7 +43,8 @@ const RepositoryList = () => {
   const [order, setOrder] = useState(null);
   const [filter, setFilter] = useState('');
   const [searchKeyword] = useDebounce(filter, 500);
-  const { repositories } = useRepositories({ order, searchKeyword });
+  const { repositories, fetchMore } = useRepositories({ order, searchKeyword, first: 15 });
+  const onEndReach = () => fetchMore();
 
   const history = useHistory();
   return (
@@ -52,6 +56,7 @@ const RepositoryList = () => {
         handleFilterChange={setFilter}
         filter={filter}
         onPress={(id) => history.push(`/repo/${id}`)}
+        onEndReach={onEndReach}
       />
     )
   );
