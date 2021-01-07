@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { REPOSITORY_FIELDS } from './fragments';
+import { REPOSITORY_FIELDS, REVIEW_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
   query(
@@ -41,10 +41,7 @@ export const GET_REPOSITORY = gql`
       reviews {
         edges {
           node {
-            id
-            text
-            rating
-            createdAt
+            ...ReviewFields
             user {
               id
               username
@@ -55,6 +52,7 @@ export const GET_REPOSITORY = gql`
     }
   }
   ${REPOSITORY_FIELDS}
+  ${REVIEW_FIELDS}
 `;
 
 export const GET_SIGNED_IN_USER = gql`
@@ -64,4 +62,24 @@ export const GET_SIGNED_IN_USER = gql`
       username
     }
   }
+`;
+
+export const GET_MY_REVIEWS = gql`
+  query {
+    authorizedUser {
+      id
+      username
+      reviews {
+        edges {
+          node {
+            ...ReviewFields
+            repository {
+              fullName
+            }
+          }
+        }
+      }
+    }
+  }
+  ${REVIEW_FIELDS}
 `;

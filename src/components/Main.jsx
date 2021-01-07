@@ -4,11 +4,12 @@ import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
-import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW } from '../Constants';
+import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW, ROUTE_MY_REVIEWS } from '../Constants';
 import theme from '../theme';
 import { SingleRepositoryItem } from './RepositoryItem';
 import CreateReview from './CreateReview';
 import SignUp from './SignUp';
+import MyReviews from './MyReviews';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +32,9 @@ const Main = () => {
         </Route>
         <Route path={`/${ROUTE_CREATE_REVIEW}`}>
           <CreateReview />
+        </Route>
+        <Route path={`/${ROUTE_MY_REVIEWS}`}>
+          <MyReviews />
         </Route>
         <Route path={`/${ROUTE_SIGNIN}`}>
           <SignIn />

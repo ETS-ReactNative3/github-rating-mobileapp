@@ -38,7 +38,9 @@ const ReviewItem = ({ review }) => {
           </Text>
         </View>
         <View style={styles.reviewRight}>
-          <Text fontWeight="bold">{review.user.username}</Text>
+          <Text fontWeight="bold">
+            {review.repository ? review.repository.fullName : review.user.username}
+          </Text>
           <Text color="textSecondary">{review.createdAt}</Text>
           <Text>{review.text}</Text>
         </View>

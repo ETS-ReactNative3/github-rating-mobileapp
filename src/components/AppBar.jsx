@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
-import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW } from '../Constants';
+import { ROUTE_SIGNIN, ROUTE_SIGNUP, ROUTE_CREATE_REVIEW, ROUTE_MY_REVIEWS } from '../Constants';
 import useSignedInUser from '../hooks/useSignedInUser';
 import AppBarTab from './AppBarTab';
 import useSignOut from '../hooks/useSignOut';
@@ -31,6 +31,7 @@ const AppBar = () => {
         {signedInUser && signedInUser.authorizedUser !== null ? (
           <>
             <AppBarTab label="Create a review" href={ROUTE_CREATE_REVIEW} />
+            <AppBarTab label="My reviews" href={ROUTE_MY_REVIEWS} />
             <AppBarTab label="Sign out" onPress={async () => await signOut()} />
           </>
         ) : (
