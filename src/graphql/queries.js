@@ -1,38 +1,32 @@
 import { gql } from 'apollo-boost';
+import { REPOSITORY_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
-  query {
-    repositories {
+  query(
+    $orderDirection: OrderDirection!
+    $orderBy: AllRepositoriesOrderBy!
+    $searchKeyword: String!
+  ) {
+    repositories(
+      orderDirection: $orderDirection
+      orderBy: $orderBy
+      searchKeyword: $searchKeyword
+    ) {
       edges {
         node {
-          id
-          fullName
-          description
-          language
-          stargazersCount
-          forksCount
-          reviewCount
-          ratingAverage
-          ownerAvatarUrl
+          ...RepositoryFields
         }
       }
     }
   }
+  ${REPOSITORY_FIELDS}
 `;
 
 export const GET_REPOSITORY = gql`
   query($idparam: ID!) {
     repository(id: $idparam) {
-      id
-      fullName
+      ...RepositoryFields
       url
-      description
-      language
-      stargazersCount
-      forksCount
-      reviewCount
-      ratingAverage
-      ownerAvatarUrl
       reviews {
         edges {
           node {
@@ -49,6 +43,7 @@ export const GET_REPOSITORY = gql`
       }
     }
   }
+  ${REPOSITORY_FIELDS}
 `;
 
 export const GET_SIGNED_IN_USER = gql`
