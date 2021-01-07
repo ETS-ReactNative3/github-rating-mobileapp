@@ -74,6 +74,7 @@ export const GET_MY_REVIEWS = gql`
           node {
             ...ReviewFields
             repository {
+              id
               fullName
             }
           }

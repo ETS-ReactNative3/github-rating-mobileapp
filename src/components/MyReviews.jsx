@@ -4,7 +4,7 @@ import useMyReviews from '../hooks/useMyReviews';
 import ReviewItem from './ReviewItem';
 
 export const MyReviews = () => {
-  const { reviews } = useMyReviews();
+  const { reviews, refetch } = useMyReviews();
   const reviewNodes = reviews && reviews.edges ? reviews.edges.map((edge) => edge.node) : [];
 
   return (
@@ -12,7 +12,7 @@ export const MyReviews = () => {
       <FlatList
         data={reviewNodes}
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-        renderItem={({ item }) => <ReviewItem review={item} />}
+        renderItem={({ item }) => <ReviewItem review={item} refetchReviews={refetch} />}
         keyExtractor={(item) => item.id}
       />
     )

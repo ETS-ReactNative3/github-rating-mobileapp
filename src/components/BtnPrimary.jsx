@@ -13,16 +13,19 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.primary,
     overflow: 'hidden', // otherwise the borderRadius doesnt apply for the bg color
   },
+  delete: {
+    backgroundColor: theme.colors.error,
+    borderColor: theme.colors.error,
+  },
 });
 
-const BtnPrimary = ({ style, label, onPress, ...props }) => {
+const BtnPrimary = ({ style, label, onPress, btnType, ...props }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress} {...props}>
       <Text
         fontWeight="bold"
         color="inverse"
-        style={[style, styles.buttonStyle]}
-        testID="signinBtn"
+        style={[style, styles.buttonStyle, btnType === 'delete' && styles.delete]}
         {...props}
       >
         {label}
